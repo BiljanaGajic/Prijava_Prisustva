@@ -1,6 +1,8 @@
 package prijava_prisustva;
 
 import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -10,10 +12,11 @@ public class GUI extends javax.swing.JFrame {
         initComponents();
         Icon icon = new ImageIcon("logo.png");
         logo.setIcon(icon);
-        String primjerIndeksa = "npr. 2014254178 (godina pa broj)";
-        Color ghostColor = Color.GRAY;
-        indeks_TF.setText(primjerIndeksa);
-        indeks_TF.setForeground(ghostColor);
+        prijavi_B.requestFocus();
+        indeks_TF.setText("npr. 2014254178 (godina pa broj)");
+        indeks_TF.setForeground(Color.GRAY);
+        
+        postaviPromptTekst();
     }
 
     @SuppressWarnings("unchecked")
@@ -83,14 +86,27 @@ public class GUI extends javax.swing.JFrame {
 
     private void indeks_TFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_indeks_TFMouseClicked
         indeks_TF.setForeground(Color.BLACK);
-        indeks_TF.setText("");
+        //indeks_TF.setText("");
     }//GEN-LAST:event_indeks_TFMouseClicked
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUI().setVisible(true);
+    private void postaviPromptTekst() {
+        indeks_TF.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent fe) {
+                indeks_TF.setText("");
             }
+
+            @Override
+            public void focusLost(FocusEvent fe) {
+                indeks_TF.setText("npr. 2014254178 (godina pa broj)");
+                indeks_TF.setForeground(Color.GRAY);
+            }
+        });
+    }
+    
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(() -> {
+            new GUI().setVisible(true);
         });
     }
 
