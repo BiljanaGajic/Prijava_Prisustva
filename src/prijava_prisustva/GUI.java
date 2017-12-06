@@ -3,17 +3,16 @@ package prijava_prisustva;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class GUI extends javax.swing.JFrame {
 
     public GUI() {
         initComponents();
-        Icon icon = new ImageIcon("logo.png");
-        logo.setIcon(icon);
+        setResizable(false);
+        logo.setIcon(new ImageIcon("logo.png"));
         prijavi_B.requestFocus();
-        indeks_TF.setText("npr. 2014254178 (godina pa broj)");
+        indeks_TF.setText("npr. 2014/254178 (godina pa broj)");
         indeks_TF.setForeground(Color.GRAY);
         
         postaviPromptTekst();
@@ -44,6 +43,11 @@ public class GUI extends javax.swing.JFrame {
 
         prijavi_B.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         prijavi_B.setText("prijavi");
+        prijavi_B.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prijavi_BActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,8 +90,11 @@ public class GUI extends javax.swing.JFrame {
 
     private void indeks_TFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_indeks_TFMouseClicked
         indeks_TF.setForeground(Color.BLACK);
-        //indeks_TF.setText("");
     }//GEN-LAST:event_indeks_TFMouseClicked
+
+    private void prijavi_BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prijavi_BActionPerformed
+        
+    }//GEN-LAST:event_prijavi_BActionPerformed
 
     private void postaviPromptTekst() {
         indeks_TF.addFocusListener(new FocusListener() {
@@ -98,7 +105,7 @@ public class GUI extends javax.swing.JFrame {
 
             @Override
             public void focusLost(FocusEvent fe) {
-                indeks_TF.setText("npr. 2014254178 (godina pa broj)");
+                indeks_TF.setText("npr. 2014/254178 (godina pa broj)");
                 indeks_TF.setForeground(Color.GRAY);
             }
         });
